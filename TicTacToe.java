@@ -60,6 +60,10 @@ public class TicTacToe {
 				}
 				break;
 			}
+			if(checkDraw()) {
+				System.out.println("Draw!");
+				break;
+			}
 			playerOne = !playerOne;
 		}
 	}
@@ -82,6 +86,17 @@ public class TicTacToe {
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean checkDraw() {
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if(board[i][j] == 0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public static void printBoard() {
