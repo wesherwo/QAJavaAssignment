@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -5,7 +6,11 @@ public class TicTacToe {
 	public static int[][] board = new int[3][3];
 	public static boolean playerOne;
 	public static Scanner scanner = new Scanner(System.in);
+	public static ArrayList<String> players = new ArrayList<String>();
+	public static ArrayList<Integer> wins = new ArrayList<Integer>();
+	public static String p1, p2;
 	public static void main(String[] args) {
+		getNames();
 		startGame();
 		while(true) {
 			System.out.println("Play again?(Y/N): ");
@@ -13,11 +18,46 @@ public class TicTacToe {
 			if(in.equals("Y") || (in.equals("y"))) {
 				startGame();
 			} else if(in.equals("N") || (in.equals("n"))){
-				System.out.println("Have a nice day.");
-				break;
+				System.out.println("New Players?(Y/N): ");
+				in = scanner.nextLine();
+				if(in.equals("Y") || (in.equals("y"))) {
+					getNames();
+					startGame();
+				} else if(in.equals("N") || (in.equals("n"))){
+					printWins();
+					System.out.println("Have a nice day.");
+					break;
+				}
 			}
 		}
 		scanner.close();
+	}
+	
+	public static void getNames() {
+		System.out.println("Enter player 1 name: ");
+		p1 = scanner.nextLine();
+		System.out.println("Enter player 2 name: ");
+		p2 = scanner.nextLine();
+		boolean found = false;
+		for(String p: players) {
+			if(p.equals(p1)) {
+				found = true;
+			}
+		}
+		if(!found) {
+			players.add(p1);
+			wins.add(0);
+		}
+		found = false;
+		for(String p: players) {
+			if(p.equals(p2)) {
+				found = true;
+			}
+		}
+		if(!found) {
+			players.add(p2);
+			wins.add(0);
+		}
 	}
 
 	public static void startGame() {
@@ -34,9 +74,9 @@ public class TicTacToe {
 				move = -1;
 				try {
 					if(playerOne) {
-						System.out.println("Player 1(X) move(1-9): ");
+						System.out.println(p1 + "(X) move(1-9): ");
 					} else {
-						System.out.println("Player 2(O) move(1-9): ");
+						System.out.println(p2 + "(O) move(1-9): ");
 					}
 					move = Integer.parseInt(scanner.nextLine()) - 1;
 				} catch (NumberFormatException e) {
@@ -55,8 +95,18 @@ public class TicTacToe {
 			if(checkWin()) {
 				if(playerOne) {
 					System.out.println("Player 1 Wins!");
+					for(int i = 0; i < players.size(); i++) {
+						if(players.get(i).equals(p1)) {
+							wins.set(i, wins.get(i) + 1);
+						}
+					}
 				} else {
 					System.out.println("Player 2 Wins!");
+					for(int i = 0; i < players.size(); i++) {
+						if(players.get(i).equals(p2)) {
+							wins.set(i, wins.get(i) + 1);
+						}
+					}
 				}
 				break;
 			}
@@ -113,5 +163,11 @@ public class TicTacToe {
 		if(board[i][j] == 1) return "X";
 		if(board[i][j] == 2) return "O";
 		return " ";
+	}
+	
+	public static void printWins(){
+		for(int i = 0; i < players.size(); i++) {
+			System.out.println(players.get(i) + " : " + wins.get(i) + " wins!");
+		}
 	}
 }
