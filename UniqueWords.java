@@ -41,5 +41,4 @@ public class UniqueWords {
 			System.out.println(uWords.get(i).toLowerCase() + " - " + counts.get(i));
 		}
 	}
-
 }
