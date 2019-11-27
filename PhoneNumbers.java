@@ -6,14 +6,20 @@ public class PhoneNumbers {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter a phone number: ");
 		String number = scanner.nextLine();
+		number = number.replace("-", "");
+		number = number.replace("(", "");
+		number = number.replace(")", "");
+		number = number.replace(" ", "");
 		boolean valid = true;
-		for(int i = 0; i < number.length() - 3; i++) {
-			if(number.substring(i,i+3).equals("911")) {
-				valid = false;
-				break;
-			}
+		if(number.contains("911")){
+			valid = false;
 		}
 		if(number.length() != 10){
+			valid = false;
+		}
+		try {
+			Long.parseLong(number);
+		}catch(NumberFormatException e) {
 			valid = false;
 		}
 		if(valid)
