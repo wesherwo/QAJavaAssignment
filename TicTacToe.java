@@ -151,11 +151,11 @@ public class TicTacToe {
 
 	public static void printBoard() {
 		System.out.println();
-		System.out.println(printPiece(0,0) + "|" + printPiece(0,1) + "|" + printPiece(0,2));
-		System.out.println("-----");
-		System.out.println(printPiece(1,0) + "+" + printPiece(1,1) + "+" + printPiece(1,2));
-		System.out.println("-----");
-		System.out.println(printPiece(2,0) + "|" + printPiece(2,1) + "|" + printPiece(2,2));
+		System.out.println(" " + printPiece(0,0) + " | " + printPiece(0,1) + " | " + printPiece(0,2));
+		System.out.println("---+---+---");
+		System.out.println(" " + printPiece(1,0) + " | " + printPiece(1,1) + " | " + printPiece(1,2));
+		System.out.println("---+---+---");
+		System.out.println(" " + printPiece(2,0) + " | " + printPiece(2,1) + " | " + printPiece(2,2));
 		System.out.println();
 	}
 
